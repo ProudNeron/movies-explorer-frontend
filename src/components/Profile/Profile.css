@@ -1,0 +1,136 @@
+.profile {
+  padding-top: 70px;
+  padding-bottom: 70px;
+  background-color: #202020;
+}
+
+.profile__title {
+  margin: 0 auto 123px auto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  color: #FFF;
+}
+
+.profile__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto 16px auto;
+  width: 410px;
+  background-color: transparent;
+}
+
+.profile__input-label {
+  width: 100%;
+  margin: 0 0 15px 0;
+  padding: 0 0 15px 0;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #424242;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  color: #FFF;
+}
+
+.profile__input-label:last-of-type {
+  border-bottom: none;
+  margin-bottom: 205px;
+}
+
+.profile__input {
+  margin: 0;
+  background-color: transparent;
+  border: none;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: right;
+  color: #FFF;
+}
+
+.profile__submit-btn {
+  display: block;
+  border: none;
+  background-color: transparent;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  color: #FFF;
+  cursor: pointer;
+  transition: opacity linear 0.3s 0s;
+}
+
+.profile__submit-btn:hover {
+  opacity: 0.4;
+}
+
+.profile__logout-btn {
+  display: block;
+  margin: 0 auto;
+  border: none;
+  background-color: transparent;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  color: #EE3465;
+  transition: opacity linear 0.3s 0s;
+  cursor: pointer;
+}
+
+.profile__logout-btn:hover {
+  opacity: 0.4;
+}
+
+@media screen and (max-width: 1060px) {
+  .profile {
+    padding-top: 231px;
+    padding-bottom: 269px;
+  }
+
+  .profile__title {
+    margin-bottom: 96px;
+  }
+
+  .profile__input-label:last-of-type {
+    margin-bottom: 195px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .profile {
+    padding-top: 65px;
+    padding-bottom: 40px;
+  }
+
+  .profile__title {
+    margin-bottom: 80px;
+  }
+
+  .profile__form {
+    width: 260px;
+  }
+
+  .profile__submit-btn {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .profile__logout-btn {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .profile__input-label:last-of-type {
+    margin-bottom: 365px;
+  }
+}

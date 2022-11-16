@@ -1,0 +1,161 @@
+.about-project {
+  padding: 112px 70px 104px 70px;
+  background-color: #202020;;
+}
+
+.about-project__title {
+  margin-top: 0;
+  margin-bottom: 70px;
+  padding-bottom: 23px;
+  border-bottom: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #DADADA;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  color: #FFF;
+}
+
+.about-project__table {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 111px;
+}
+
+.about-project__article {
+  max-width: 550px;
+}
+
+.about-project__subtitle {
+  margin-top: 0;
+  margin-bottom: 26px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+  color: #FFF;
+}
+
+.about-project__paragraph {
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #FFFF;
+}
+
+.flex-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-row:last-of-type {
+  margin-top: 5px;
+}
+
+.flex-row__item {
+  flex-basis: 228px;
+  text-align: center;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #000;
+  padding: 9px 0;
+}
+
+.flex-row__item_theme_green {
+  text-align: center;
+  background-color: #3DDC84;
+}
+
+.flex-row__item_theme_grey {
+  background-color: #303030;
+  color: #FFF;
+}
+
+.flex-row__item_theme_transparent {
+  background-color: transparent;
+  color: #8B8B8B;
+}
+
+.flex-row__item_type_stretched {
+  flex-grow: 1;
+}
+
+@media screen and (max-width: 1100px) {
+  .about-project {
+    padding: 90px 50px;
+  }
+
+  .about-project__article {
+    max-width: 319px;
+  }
+
+  .about-project__subtitle {
+    margin-bottom: 22px;
+  }
+
+  .about-project__paragraph {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-project__table {
+    margin-bottom: 93px;
+  }
+
+  .flex-row__item {
+    flex-basis: 140px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .about-project {
+    padding: 70px 18px;
+  }
+
+  .about-project__title {
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 60px;
+    padding-bottom: 28px;
+  }
+
+  .about-project__table {
+    flex-direction: column;
+    gap: 56px;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 60px;
+  }
+
+  .about-project__article {
+    max-width: 284px;
+  }
+
+  .about-project__subtitle {
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 16px;
+  }
+
+  .flex-row__item {
+    flex-basis: 100px;
+    font-size: 11px;
+    line-height: 13px;
+    padding: 11px 0;
+  }
+
+  .about-project__paragraph {
+    font-size: 11px;
+    line-height: 16px;
+  }
+}
+
