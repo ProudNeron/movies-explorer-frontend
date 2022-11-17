@@ -1,0 +1,37 @@
+.checkbox-container {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 49px;
+}
+
+.checkbox-container__desc {
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #FFF;
+}
+
+@media screen and (max-width: 1060px) {
+  .checkbox-container {
+    margin-bottom: 62px;
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+
+  .checkbox-container {
+    margin-bottom: 51px;
+  }
+
+  .checkbox-container__desc {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 18px;
+    color: #FFF;
+  }
+}

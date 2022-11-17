@@ -1,0 +1,19 @@
+@import url("../../vendor/normalize.css");
+@import url("../../vendor/fonts/fonts.css");
+
+.app {
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-sizeadjust: 100%;
+  background-color: #202020;
+}
+
+.app__page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 1280px;
+  min-width: 320px;
+  margin: 0 auto;
+  background-color: #202020;
+}
