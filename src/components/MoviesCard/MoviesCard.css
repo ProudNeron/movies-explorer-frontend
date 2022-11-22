@@ -78,6 +78,12 @@
   cursor: pointer;
 }
 
+.movies-card__trailer-link {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
 @media screen and (max-width: 1060px) {
   .movies-card {
     max-width: 339px;

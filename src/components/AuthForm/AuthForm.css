@@ -53,6 +53,10 @@
   transition: opacity ease-in-out 0.3s 0s;
 }
 
+.form__submit-btn_disabled {
+  background-color: grey;
+}
+
 .form__submit-btn:hover {
   opacity: 0.6;
 }

@@ -1,28 +1,67 @@
 import './MoviesCardList.css';
-import img1 from '../../images/movie-card-img.jpg';
-import img2 from '../../images/movie-card-img2.jpg';
-import img3 from '../../images/movie-card-img3.jpg';
+import {useState, useEffect} from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
+import {DESKTOP_WIDTH, TABLET_WIDTH, MOBILE_WIDTH} from "../../utils/consts";
 
-function MoviesCardList({btnType, cards}) {
+function MoviesCardList({btnType, movies, onLikeClick, movieAdded}) {
+  const [currentCount, setCurrentCount] = useState(0);
+  const [nextRow, setNextRow] = useState(3);
+  const [moviesInList, setMoviesInList] = useState([]);
+
+  useEffect(() => {
+    const windowSize = window.innerWidth;
+    setNextRow(getCount(windowSize).extra);
+    const count = Math.min(movies.length, getCount(windowSize).first);
+    setMoviesInList(movies.slice(0, count));
+    setCurrentCount(count);
+  }, [movies]);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const handleResize = () => {
+    const windowSize = window.innerWidth;
+    setNextRow(getCount(windowSize).extra);
+  };
+
+  const getCount = (windowSize) => {
+    if (windowSize >= DESKTOP_WIDTH) {
+      return { first: 12, extra: 3 };
+    } if (windowSize > MOBILE_WIDTH && windowSize <= TABLET_WIDTH) {
+      return { first: 8, extra: 2 };
+    }
+    return { first: 5, extra: 2 };
+  };
+
+  const renderNextRow = () => {
+    const count = Math.min(movies.length, currentCount + nextRow);
+    const extraMovies = movies.slice(currentCount, count);
+    setMoviesInList([...moviesInList, ...extraMovies]);
+    setCurrentCount(count);
+  };
+
+  const renderMore = () => renderNextRow();
   return (
-    <ul className='movies-card-list'>
-      {
-        cards.map(card => {
-          return (
-            <MoviesCard title={card.name}
-                        duration={card.duration}
-                        imgLink={card.imgLink === '1' ? img1 : (card.imgLink === '2' ? img2 : img3)}
-                        btnType={btnType}
-                        isLiked={false}
-                        key={card._id}/>
-          );
-        })
-      }
-      <MoviesCard title='фильм'
-                  duration='1ч 3мин' imgLink={img1} btnType='movies-card__btn_type_like' isLiked={true}></MoviesCard>
-    </ul>
+    <>
+      <ul className='movies-card-list'>
+        {
+          movies.map((movie) => {
+            return (
+              <MoviesCard key={movie.movieId} movieData={movie} btnType={btnType} imgLink={movie.image}
+                          movieAdded={movieAdded} onLikeClick={onLikeClick}  />
+            );
+          })
+        }
+      </ul>
+      { currentCount < movies.length && <button type="button" aria-label='Ещё' onClick={renderMore}
+                                                className="movies-card-list__more-btn">Ещё</button>}
+    </>
   );
 }
 
-export default MoviesCardList
+export default MoviesCardList;

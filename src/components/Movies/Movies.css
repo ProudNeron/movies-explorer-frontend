@@ -6,35 +6,9 @@
   flex: 1;
 }
 
-.movies__more-btn {
-  width: 320px;
-  height: 36px;
-  padding: 0;
-  background-color: #202020;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 15px;
-  text-align: center;
-  color: #FFF;
-  border: solid 1px #424242;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: opacity linear 0.3s 0s;
-}
-
-.movies__more-btn:hover {
-  opacity: 0.4;
-}
-
 @media screen and (max-width: 1060px) {
   .movies {
     padding: 80px 30px 80px 30px;
-  }
-
-  .movies__more-btn {
-    font-size: 12px;
-    line-height: 15px
   }
 }
 
@@ -43,9 +17,5 @@
     padding-top: 86px;
     padding-left: 10px;
     padding-right: 10px;
-  }
-
-  .movies__more-btn {
-    width: 240px;
   }
 }
