@@ -70,8 +70,7 @@ const removeLike = (movieId) => {
       'Content-Type': 'application/json',
       Accept: 'application/json',
     },
-  })
-    .then(checkServerResponse);
+  }).then(checkServerResponse);
 };
 
 const putLike = (data) => {

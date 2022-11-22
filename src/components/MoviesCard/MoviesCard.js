@@ -2,7 +2,7 @@ import './MoviesCard.css';
 import {transformDurationToHoursAndMinutes} from "../../utils/utils";
 
 function MoviesCard({ btnType, movieData,  movieAdded, onLikeClick}) {
-  const {nameRU, duration, image, trailer,} = movieData;
+  const {nameRU, duration, image, trailerLink,} = movieData;
 
   const liked = movieAdded(movieData);
 
@@ -28,7 +28,7 @@ function MoviesCard({ btnType, movieData,  movieAdded, onLikeClick}) {
           : <button type='button' aria-label='удалить' onClick={removeHandler}
                     className='movies-card__btn-delete' />}
       </div>
-      <a href={trailer} target='_blank' aria-label='перейти к трейлеру'
+      <a href={trailerLink} target='_blank' aria-label='перейти к трейлеру'
          className="movies-card__trailer-link">
         <img src={image} alt={nameRU} className="movies-card__img"/>
       </a>

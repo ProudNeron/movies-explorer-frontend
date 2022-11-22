@@ -256,8 +256,8 @@ function App() {
     removeLike(movieId)
       .then((res) => {
         if (res) {
-          const newArray = savedMovies.filter((j) => j.movieId !== res.movieId);
-          setSavedMovies(newArray);
+          const updatedSavedMovies = savedMovies.filter((j) => j._id !== movieId);
+          setSavedMovies(updatedSavedMovies);
         }
       })
       .catch((err) => {

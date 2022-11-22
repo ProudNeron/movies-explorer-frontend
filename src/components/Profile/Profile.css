@@ -54,6 +54,7 @@
   line-height: 13px;
   text-align: right;
   color: #FFF;
+  flex-grow: 1;
 }
 
 .profile__input-error {

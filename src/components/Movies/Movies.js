@@ -6,7 +6,7 @@ import CheckboxContainer from "../CheckboxContainer/CheckboxContainer";
 import Preloader from '../Preloader/Preloader';
 import {SHORT_DURATION_MIN} from "../../utils/consts";
 
-function Movies({savedMovies, onSubmitSearch, movies, loading, loadingError, onLikeClick, movieAdded,}) {
+function Movies({ onSubmitSearch, movies, loading, loadingError, onLikeClick, movieAdded,}) {
   const [filterIsOn, setFilterIsOn] = useState(false);
 
   const filterShort = movies => movies.filter(mov => mov.duration < SHORT_DURATION_MIN);
@@ -23,7 +23,6 @@ function Movies({savedMovies, onSubmitSearch, movies, loading, loadingError, onL
         && loadingError === ''
         && <MoviesCardList btnType='like'
                            onLikeClick={onLikeClick}
-                           savedMovies={savedMovies}
                            movies={filterIsOn ? filterShort(movies) : movies}
                            movieAdded={movieAdded}/>}
       {

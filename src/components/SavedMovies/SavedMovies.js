@@ -10,18 +10,17 @@ function SavedMovies({movies, loading, loadingError, onLikeClick, movieAdded,}) 
   const [moviesInList, setMoviesInList] = useState([]);
   const [filterIsOn, setFilterIsOn] = useState(false);
 
-  const filterShort = (moviesToFilter) => moviesToFilter.filter((item) => item.duration < SHORT_DURATION_MIN);
-  const onFilterClick = () => setFilterIsOn(!filterIsOn);
-
-
   useEffect(() => {
     setMoviesInList(movies);
   }, [movies]);
 
+  const filterShort = (moviesToFilter) => moviesToFilter.filter((item) => item.duration < SHORT_DURATION_MIN);
+  const onFilterClick = () => setFilterIsOn(!filterIsOn);
+
   const searchFilter = (data, searchQuery) => {
     if (searchQuery) {
       const regex = new RegExp(searchQuery, 'gi');
-      return data.filter((item) => regex.test(item.nameRU) || regex.test(item.nameEN));
+      return data.filter((j) => regex.test(j.nameRU) || regex.test(j.nameEN));
     }
     return [];
   };
