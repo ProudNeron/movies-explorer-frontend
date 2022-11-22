@@ -32,7 +32,7 @@ function SavedMovies({movies, loading, loadingError, onLikeClick, movieAdded,}) 
       <SearchForm onSearch={handleSearchInSaved} loading={loading}></SearchForm>
       {loading && <Preloader />}
       <CheckboxContainer onFilterClick={onFilterClick} />
-      <MoviesCardList btnType='movies-card__btn_type_delete'
+      <MoviesCardList btnType='delete'
                       movies={filterIsOn ? filterShort(moviesInList) : moviesInList} onLikeClick={onLikeClick}
                       movieAdded={movieAdded} />
       {

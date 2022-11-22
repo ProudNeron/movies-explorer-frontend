@@ -251,7 +251,7 @@ function App() {
       });
   };
 
-  const removeLikeFromCard = (movie) => {
+  const removeLikeOnCard = (movie) => {
     const movieId = savedMovies.find((j) => j.id === movie.id)._id;
     removeLike(movieId)
       .then((res) => {
@@ -265,9 +265,9 @@ function App() {
       });
   };
 
-  const movieAdded = (movie) => savedMovies.some((smov) => smov.id === movie.id);
+  const movieAdded = (movie) => savedMovies.some(smov => smov.id === movie.id);
 
-  const handleLike = (m, Liked) => (Liked ? putLike(m) : removeLike(m));
+  const handleLike = (m, Liked) => (Liked ? putLikeOnCard(m) : removeLikeOnCard(m));
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -309,6 +309,7 @@ function App() {
                 <ProtectedRoute loggedIn={loggedIn} children={<SavedMovies movies={savedMovies}
                                                                            loading={loading}
                                                                            loadingError={loadingError}
+                                                                           movieAdded={movieAdded}
                                                                            onLikeClick={handleLike}/>} />
                 <Footer/>
               </>

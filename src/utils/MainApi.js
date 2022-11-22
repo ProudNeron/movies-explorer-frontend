@@ -89,7 +89,7 @@ const putLike = (data) => {
       year: data.year || '',
       description: data.description || '',
       image: data.image,
-      trailer: data.trailer || '',
+      trailerLink: data.trailer || '',
       thumbnail: data.image || '',
       movieId: data.id || '',
       nameRU: data.nameRU,

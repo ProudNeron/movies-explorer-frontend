@@ -21,7 +21,7 @@ function Movies({savedMovies, onSubmitSearch, movies, loading, loadingError, onL
       <CheckboxContainer onFilterClick={onFilterClick}/>
       {!loading
         && loadingError === ''
-        && <MoviesCardList btnType='movies-card__btn_type_like'
+        && <MoviesCardList btnType='like'
                            onLikeClick={onLikeClick}
                            savedMovies={savedMovies}
                            movies={filterIsOn ? filterShort(movies) : movies}

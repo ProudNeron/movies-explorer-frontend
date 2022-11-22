@@ -1,11 +1,12 @@
 import './MoviesCard.css';
+import {transformDurationToHoursAndMinutes} from "../../utils/utils";
 
 function MoviesCard({ btnType, movieData,  movieAdded, onLikeClick}) {
   const {nameRU, duration, image, trailer,} = movieData;
 
   const liked = movieAdded(movieData);
 
-  const handleBookmarkClick = (e) => {
+  const handleLikeClick = (e) => {
     e.preventDefault();
     onLikeClick(movieData, !liked);
   };
@@ -19,10 +20,13 @@ function MoviesCard({ btnType, movieData,  movieAdded, onLikeClick}) {
       <div className='movies-card__container'>
         <div className="movies-card__text-info">
           <h2 className="movies-card__title">{nameRU}</h2>
-          <p className="movies-card__duration">{duration}</p>
+          <p className="movies-card__duration">{transformDurationToHoursAndMinutes(duration)}</p>
         </div>
-        <button onClick={btnType === 'movies-card__btn_type_like' ? handleBookmarkClick : removeHandler}
-                className={"movies-card__btn" + " " + btnType + " " + (liked && 'movies-card__btn_liked')}></button>
+        {btnType === 'like'
+          ? <button type='button' aria-label='сохранить' onClick={handleLikeClick}
+                    className={'movies-card__btn-like' + (liked ? ' movies-card__btn-like_active' : '')} />
+          : <button type='button' aria-label='удалить' onClick={removeHandler}
+                    className='movies-card__btn-delete' />}
       </div>
       <a href={trailer} target='_blank' aria-label='перейти к трейлеру'
          className="movies-card__trailer-link">

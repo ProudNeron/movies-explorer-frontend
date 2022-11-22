@@ -8,13 +8,6 @@ function MoviesCardList({btnType, movies, onLikeClick, movieAdded}) {
   const [nextRow, setNextRow] = useState(3);
   const [moviesInList, setMoviesInList] = useState([]);
 
-  useEffect(() => {
-    const windowSize = window.innerWidth;
-    setNextRow(getCount(windowSize).extra);
-    const count = Math.min(movies.length, getCount(windowSize).first);
-    setMoviesInList(movies.slice(0, count));
-    setCurrentCount(count);
-  }, [movies]);
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
@@ -23,6 +16,14 @@ function MoviesCardList({btnType, movies, onLikeClick, movieAdded}) {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    const windowSize = window.innerWidth;
+    setNextRow(getCount(windowSize).extra);
+    const count = Math.min(movies.length, getCount(windowSize).first);
+    setMoviesInList(movies.slice(0, count));
+    setCurrentCount(count);
+  }, [movies]);
 
   const handleResize = () => {
     const windowSize = window.innerWidth;
@@ -50,7 +51,7 @@ function MoviesCardList({btnType, movies, onLikeClick, movieAdded}) {
     <>
       <ul className='movies-card-list'>
         {
-          movies.map((movie) => {
+          moviesInList.map((movie) => {
             return (
               <MoviesCard key={movie.movieId} movieData={movie} btnType={btnType} imgLink={movie.image}
                           movieAdded={movieAdded} onLikeClick={onLikeClick}  />

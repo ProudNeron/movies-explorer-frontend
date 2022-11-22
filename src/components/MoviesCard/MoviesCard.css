@@ -43,7 +43,7 @@
   color: #8B8B8B;
 }
 
-.movies-card__btn {
+.movies-card__btn-delete {
   width: 30px;
   height: 30px;
   background-color: #313131;
@@ -53,21 +53,31 @@
   background-position: center;
   transition: opacity ease 0.3s 0s;
   cursor: pointer;
-}
-
-.movies-card__btn:hover {
-  opacity: 0.5;
-}
-
-.movies-card__btn_type_delete {
   background-image: url("../../images/movies-delete-btn.svg");
 }
 
-.movies-card__btn_type_like {
+.movies-card__btn-delete:hover {
+  opacity: 0.4;
+}
+
+.movies-card__btn-like {
+  width: 30px;
+  height: 30px;
+  background-color: #313131;
+  border-radius: 36px;
+  border: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: opacity ease 0.3s 0s;
+  cursor: pointer;
   background-image: url("../../images/movies-like-btn.svg");
 }
 
-.movies-card__btn_liked {
+.movies-card__btn-like:hover {
+  opacity: 0.4;
+}
+
+.movies-card__btn-like_active {
   background-color: #3DDC84;
   background-image: url("../../images/movies-like-btn-liked.svg");
 }
