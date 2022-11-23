@@ -22,7 +22,7 @@ function Profile({currentUser, logout, updateUserInfo, editSuccess, editFailed,}
         <label htmlFor="name" className="profile__input-label">
           Имя
           <input type="text" id='name' required name='name' minLength='2' maxLength='30'
-                 value={values.name || ''} pattern='^(?=.{8,40}$)[A-Za-zа-яА-ЯёЁ/\s/-]*$'
+                 value={values.name || ''} pattern='^(?=.{2,30}$)[A-Za-zа-яА-ЯёЁ/\s/-]*$'
                  placeholder='Имя' onChange={handleChange} autoComplete='off' className="profile__input"/>
           <span className="profile__input-error">{errors.name}</span>
         </label>

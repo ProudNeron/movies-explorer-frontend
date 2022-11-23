@@ -19,6 +19,7 @@ function SearchForm({onSearch, loading, query}) {
       }, 2000);
     } else {
       onSearch(search);
+      setSearch('');
     }
   };
 

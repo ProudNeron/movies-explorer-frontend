@@ -21,7 +21,7 @@ function AuthForm({login, textBtn, onSubmit, formData, signUpError, signInError,
                  minLength='2'
                  maxLength='30'
                  name='name'
-                 pattern='^(?=.{8,40}$)[A-Za-zа-яА-ЯёЁ/\s/-]*$'
+                 pattern='^(?=.{2,30}$)[A-Za-zа-яА-ЯёЁ/\s/-]*$'
                  value={values.name || ''}
                  onChange={handleChange}
                  autoComplete='off'
