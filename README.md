@@ -7,3 +7,5 @@ https://disk.yandex.ru/d/RIVqcmaKNmIyfQ
 https://moviesexplorer.neron.nomoredomains.icu/movies
 домен бэкэнда:
 https://api.moviesexplorer.neron.nomoredomains.icu/movies
+
+ссылка на пулл реквест: https://github.com/ProudNeron/movies-explorer-frontend/pull/2
