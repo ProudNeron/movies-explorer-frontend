@@ -1,9 +1,9 @@
 import './FilterCheckbox.css';
 
-function FilterCheckbox({onFilterClick}) {
+function FilterCheckbox({onFilterClick, filterIsOn}) {
   return (
     <div className="filter-checkbox">
-      <input onClick={onFilterClick} type="checkbox" className="filter-checkbox__switcher" />
+      <input onClick={onFilterClick} type="checkbox" checked={filterIsOn} className="filter-checkbox__switcher" />
     </div>
   );
 }

@@ -43,16 +43,19 @@ function App() {
 
   const [allMovies, setAllMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
-  const [searchMovies, setSearchMovies] = useState([]);
-  const [searchSavedMovies, setSearchSavedMovies] = useState([]);
-  const [query, setQuery] = useState();
+  const [searchMovies, setSearchMovies] = useState(localStorage.getItem('lastSearch')
+    ? JSON.parse(localStorage.getItem('lastSearch')) : []);
+  const [query, setQuery] = useState(localStorage.getItem('query') ?
+    JSON.parse(localStorage.getItem('query')) : '');
+  const [filterIsOn, setFilterIsOn] = useState(localStorage.getItem('filterIsOn')
+    ? JSON.parse(localStorage.getItem('filterIsOn')) : false);
 
   const getCurrentUser = () => {
     const token = localStorage.getItem('token');
     getUserInfo(token)
       .then((data) => {
-          setCurrentUser(data);
-          localStorage.setItem('currentUser', JSON.stringify(data));
+        setCurrentUser(data);
+        localStorage.setItem('currentUser', JSON.stringify(data));
       })
       .catch((err) => {
         console.error(err);
@@ -64,7 +67,7 @@ function App() {
     const path = location.pathname;
     if (token) {
       checkToken(token)
-        .then((res) => {
+        .then(() => {
           setLoggedIn(true);
           getCurrentUser();
           navigate(path);
@@ -123,14 +126,16 @@ function App() {
   const handleSearch = (searchQuery) => {
     setLoading(true);
     setTimeout(() => {
+      localStorage.setItem('query', JSON.stringify(searchQuery));
       setQuery(searchQuery);
-      setSearchMovies(extractSearch(allMovies, searchQuery));
+      const movieArray = extractSearch(allMovies, searchQuery);
+      setSearchMovies(movieArray);
+      localStorage.setItem('lastSearch', JSON.stringify(movieArray));
       setLoading(false);
     }, 600);
   };
 
   useEffect(() => {
-    setSearchSavedMovies(extractSearch(savedMovies, query));
     localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
   }, [savedMovies]);
 
@@ -203,7 +208,7 @@ function App() {
           setLoadingError('Во время запроса произошла ошибка. '
             + 'Возможно, проблема с соединением или сервер недоступен. '
             + 'Подождите немного и попробуйте ещё раз');
-        });;
+        });
     }
   }, []);
 
@@ -212,12 +217,16 @@ function App() {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('movies');
     localStorage.removeItem('savedMovies');
+    localStorage.removeItem('filterIsOn');
+    localStorage.removeItem('query');
+    localStorage.removeItem('lastSearch')
     setLoggedIn(false);
     setCurrentUser({});
     setAllMovies([]);
     setSavedMovies([]);
     setSearchMovies([]);
-    setSearchSavedMovies([]);
+    setFilterIsOn(false);
+    setQuery('');
 
     navigate('/');
   };
@@ -269,6 +278,8 @@ function App() {
 
   const handleLike = (m, Liked) => (Liked ? putLikeOnCard(m) : removeLikeOnCard(m));
 
+  const switchFilter = (state) => setFilterIsOn(state);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
@@ -283,23 +294,26 @@ function App() {
             }/>
             <Route path={'/profile'} element={
               <>
-                <Header theme='dark' currentUser={currentUser} loggedIn={loggedIn} />
+                <Header theme='dark' currentUser={currentUser} loggedIn={loggedIn}/>
                 <ProtectedRoute loggedIn={loggedIn} children={
                   <Profile currentUser={currentUser} logout={logout} editSuccess={editSuccess}
                            updateUserInfo={updateUserProfile}
-                           editFailed={editFailed} />
-                } />
+                           editFailed={editFailed}/>
+                }/>
               </>
             }/>
             <Route path='/movies' element={
               <>
                 <Header theme='dark' currentUser={currentUser} loggedIn={loggedIn}/>
                 <ProtectedRoute loggedIn={loggedIn} children={<Movies movies={searchMovies}
+                                                                      filterIsOn={filterIsOn}
+                                                                      switchFilter={switchFilter}
                                                                       loading={loading}
                                                                       onLikeClick={handleLike}
                                                                       movieAdded={movieAdded}
                                                                       loadingError={loadingError}
-                                                                      onSubmitSearch={handleSearch}/>} />
+                                                                      query={query}
+                                                                      onSubmitSearch={handleSearch}/>}/>
                 <Footer/>
               </>
             }/>
@@ -310,12 +324,12 @@ function App() {
                                                                            loading={loading}
                                                                            loadingError={loadingError}
                                                                            movieAdded={movieAdded}
-                                                                           onLikeClick={handleLike}/>} />
+                                                                           onLikeClick={handleLike}/>}/>
                 <Footer/>
               </>
             }/>
-            <Route path="/signin" element={<Login handleSignIn={handleSignIn} signInError={signInError} />} />
-            <Route path="/signup" element={<Register handleSignUp={handleSignUp} signUpError={signUpError} />} />
+            <Route path="/signin" element={<Login handleSignIn={handleSignIn} signInError={signInError}/>}/>
+            <Route path="/signup" element={<Register handleSignUp={handleSignUp} signUpError={signUpError}/>}/>
             <Route path="*" element={<BadRequest/>}/>
           </Routes>
         </div>

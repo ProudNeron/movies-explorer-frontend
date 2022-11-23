@@ -1,16 +1,14 @@
 import './SearchForm.css';
-import useFormWithValidation from "../../hooks/useFormWithValidation";
-import {useState, useEffect} from "react";
+import {useState} from "react";
 
-function SearchForm({ onSearch, loading }) {
-  const formWithValidation = useFormWithValidation();
-  const { search } = formWithValidation.values;
-  const { handleChange, resetForm } = formWithValidation;
+function SearchForm({onSearch, loading, query}) {
+  const [search, setSearch] = useState(query ? query : '');
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    resetForm();
-  }, [resetForm]);
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+    setError('');
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,7 +19,6 @@ function SearchForm({ onSearch, loading }) {
       }, 2000);
     } else {
       onSearch(search);
-      resetForm();
     }
   };
 

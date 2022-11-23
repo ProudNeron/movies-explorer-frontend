@@ -1,3 +1,5 @@
+import {SHORT_DURATION_MIN} from "./consts";
+
 const checkServerResponse = (res) => {
   if (res.ok) {
     return res.json();
@@ -15,4 +17,6 @@ const transformDurationToHoursAndMinutes = (dur) => {
   return `${dur}м`;
 }
 
-export {checkServerResponse, transformDurationToHoursAndMinutes};
+const filterShort = movies => movies.filter(mov => mov.duration <= SHORT_DURATION_MIN);
+
+export {checkServerResponse, transformDurationToHoursAndMinutes, filterShort};

@@ -1,24 +1,24 @@
 import './Movies.css';
-import {useState} from "react";
 import SearchForm from "../SearchForm/SearchForm.js";
 import MoviesCardList from "../MoviesCardList/MoviesCardList.js";
 import CheckboxContainer from "../CheckboxContainer/CheckboxContainer";
 import Preloader from '../Preloader/Preloader';
-import {SHORT_DURATION_MIN} from "../../utils/consts";
+import {filterShort} from "../../utils/utils";
 
-function Movies({ onSubmitSearch, movies, loading, loadingError, onLikeClick, movieAdded,}) {
-  const [filterIsOn, setFilterIsOn] = useState(false);
-
-  const filterShort = movies => movies.filter(mov => mov.duration < SHORT_DURATION_MIN);
+function Movies({
+                  onSubmitSearch, movies, loading, loadingError, onLikeClick, movieAdded,
+                  filterIsOn, switchFilter, query,
+                }) {
 
   const onFilterClick = () => {
-    setFilterIsOn(!filterIsOn);
+    switchFilter(!filterIsOn);
+    localStorage.setItem('filterIsOn', JSON.stringify(!filterIsOn));
   };
   return (
     <section aria-label='Фильмы' className='movies'>
-      <SearchForm onSearch={onSubmitSearch}/>
+      <SearchForm query={query} loading={loading} onSearch={onSubmitSearch}/>
       {loading && <Preloader/>}
-      <CheckboxContainer onFilterClick={onFilterClick}/>
+      <CheckboxContainer onFilterClick={onFilterClick} filterIsOn={filterIsOn}/>
       {!loading
         && loadingError === ''
         && <MoviesCardList btnType='like'
