@@ -261,7 +261,7 @@ function App() {
   const putLikeOnCard = (movie) => {
     putLike(movie)
       .then((res) => {
-        setSavedMovies([...savedMovies, {...res}]);
+        setSavedMovies([...savedMovies, {...res, id: res.movieId}]);
       })
       .catch((err) => {
         console.error(err);
