@@ -328,8 +328,12 @@ function App() {
                 <Footer/>
               </>
             }/>
-            <Route path="/signin" element={<Login handleSignIn={handleSignIn} signInError={signInError}/>}/>
-            <Route path="/signup" element={<Register handleSignUp={handleSignUp} signUpError={signUpError}/>}/>
+            <Route path="/signin" element={<ProtectedRoute loggedIn={!loggedIn}
+                                                           children={<Login handleSignIn={handleSignIn}
+                                                                            signInError={signInError}/>}/>}/>
+            <Route path="/signup" element={<ProtectedRoute loggedIn={!loggedIn}
+                                                           children={<Register handleSignUp={handleSignUp}
+                                                                               signUpError={signUpError}/>} />}/>
             <Route path="*" element={<BadRequest/>}/>
           </Routes>
         </div>
