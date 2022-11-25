@@ -174,7 +174,10 @@ function App() {
           getArrayOfAllMovies(allMovies);
           getArrayOfSavedMovies(savedMovies);
         })
-        .catch(() => {
+        .catch((err) => {
+          if (err.status === 401) {
+            logout();
+          }
           localStorage.removeItem('allMovies');
           localStorage.removeItem('savedMovies');
           setLoadingError('Во время запроса произошла ошибка. '
@@ -184,37 +187,7 @@ function App() {
     }
   }, [loggedIn]);
 
-  useEffect(() => {
-    const allMoviesArr = JSON.parse(localStorage.getItem('allMovies'));
-    if (allMoviesArr) {
-      setAllMovies(allMoviesArr);
-    } else {
-      getAllMovies()
-        .then(allMovies => getArrayOfAllMovies(allMovies))
-        .catch((err) => {
-          console.log(err);
-          localStorage.removeItem('allMovies');
-          setLoadingError('Во время запроса произошла ошибка. '
-            + 'Возможно, проблема с соединением или сервер недоступен. '
-            + 'Подождите немного и попробуйте ещё раз');
-        });
-    }
 
-    const saved = JSON.parse(localStorage.getItem('savedMovies'));
-    if (saved) {
-      setSavedMovies(saved);
-    } else {
-      getSavedMovies()
-        .then(savedMovies => getArrayOfAllMovies(savedMovies))
-        .catch((err) => {
-          console.log(err);
-          localStorage.removeItem('savedMovies');
-          setLoadingError('Во время запроса произошла ошибка. '
-            + 'Возможно, проблема с соединением или сервер недоступен. '
-            + 'Подождите немного и попробуйте ещё раз');
-        });
-    }
-  }, []);
 
   const logout = () => {
     localStorage.removeItem('allMovies');
