@@ -76,7 +76,7 @@ function App() {
           localStorage.removeItem('token');
           navigate('/');
           console.log(err);
-          if (err.status = 401) {
+          if (err && err.status === 401) {
             logout();
           }
         });
@@ -175,7 +175,7 @@ function App() {
           getArrayOfSavedMovies(savedMovies);
         })
         .catch((err) => {
-          if (err.status === 401) {
+          if (err && err.status === 401) {
             logout();
           }
           localStorage.removeItem('allMovies');
@@ -225,7 +225,7 @@ function App() {
         setTimeout(() => {
           setEditFailed(false);
         }, 3000);
-        if (err.status === 401) {
+        if (err && err.status === 401) {
           logout();
         }
       });
@@ -238,7 +238,7 @@ function App() {
       })
       .catch((err) => {
         console.error(err);
-        if (err.status === 401) {
+        if (err && err.status === 401) {
           logout();
         }
       });
@@ -255,7 +255,7 @@ function App() {
       })
       .catch((err) => {
         console.error(err);
-        if (err.status === 401) {
+        if (err && err.status === 401) {
           logout();
         }
       });
