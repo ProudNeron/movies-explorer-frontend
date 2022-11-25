@@ -2,7 +2,7 @@ import './MoviesCard.css';
 import {transformDurationToHoursAndMinutes} from "../../utils/utils";
 
 function MoviesCard({ btnType, movieData,  movieAdded, onLikeClick}) {
-  const {nameRU, duration, image, trailerLink,} = movieData;
+  const {nameRU, duration, image, trailerLink} = movieData;
 
   const liked = movieAdded(movieData);
 

@@ -5,6 +5,10 @@ const checkServerResponse = (res) => {
     return res.json();
   }
 
+  if (res.status === 401) {
+     return Promise.reject({status: 401});
+  }
+
   return Promise.reject(res.statusMessage);
 };
 

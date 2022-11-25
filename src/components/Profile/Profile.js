@@ -29,6 +29,8 @@ function Profile({currentUser, logout, updateUserInfo, editSuccess, editFailed,}
         <label htmlFor="email" className="profile__input-label">
           E-mail
           <input type="email" id='email' required name='email' value={values.email || ''} placeholder='email'
+                 pattern="^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+\.+[a-zA-Z]{2,}$"
+                 onChange={handleChange}
                  autoComplete='off' className="profile__input"/>
           <span className="profile__input-error">{errors.email}</span>
         </label>

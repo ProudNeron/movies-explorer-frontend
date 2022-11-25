@@ -53,8 +53,8 @@ function MoviesCardList({btnType, movies, onLikeClick, movieAdded}) {
         {
           moviesInList.map((movie) => {
             return (
-              <MoviesCard key={movie.movieId} movieData={movie} btnType={btnType} imgLink={movie.image}
-                          movieAdded={movieAdded} onLikeClick={onLikeClick}  />
+              <MoviesCard key={movie.movieId} movieData={movie} btnType={btnType} movieAdded={movieAdded}
+                          onLikeClick={onLikeClick}  />
             );
           })
         }

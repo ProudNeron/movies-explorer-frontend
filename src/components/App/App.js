@@ -76,6 +76,9 @@ function App() {
           localStorage.removeItem('token');
           navigate('/');
           console.log(err);
+          if (err.status = 401) {
+            logout();
+          }
         });
     }
   }, []);
@@ -135,15 +138,11 @@ function App() {
     }, 600);
   };
 
-  useEffect(() => {
-    localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-  }, [savedMovies]);
-
   const getArrayOfSavedMovies = (data) => {
     const savedMoviesData = data.map((j) => {
       return {
         ...j,
-        id: j.moviedId
+        id: j.movieId
       }
     });
     localStorage.setItem('savedMovies', JSON.stringify(savedMoviesData));
@@ -157,11 +156,16 @@ function App() {
         ...j,
         image: `https://api.nomoreparties.co${imageUrl}`,
         trailer: j.trailerLink,
+
       };
     });
     localStorage.setItem('allMovies', JSON.stringify(moviesData));
     setAllMovies(moviesData);
   };
+
+  useEffect(() => {
+    localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+  }, [savedMovies]);
 
   useEffect(() => {
     if (loggedIn) {
@@ -213,6 +217,7 @@ function App() {
   }, []);
 
   const logout = () => {
+    localStorage.removeItem('allMovies');
     localStorage.removeItem('token');
     localStorage.removeItem('currentUser');
     localStorage.removeItem('movies');
@@ -247,21 +252,27 @@ function App() {
         setTimeout(() => {
           setEditFailed(false);
         }, 3000);
+        if (err.status === 401) {
+          logout();
+        }
       });
   };
 
   const putLikeOnCard = (movie) => {
     putLike(movie)
       .then((res) => {
-        setSavedMovies([...savedMovies, {...res, id: res.movieId}]);
+        setSavedMovies([...savedMovies, {...res}]);
       })
       .catch((err) => {
         console.error(err);
+        if (err.status === 401) {
+          logout();
+        }
       });
   };
 
   const removeLikeOnCard = (movie) => {
-    const movieId = savedMovies.find((j) => j.id === movie.id)._id;
+    const movieId = savedMovies.find((j) => j.movieId === movie.id)._id;
     removeLike(movieId)
       .then((res) => {
         if (res) {
@@ -271,10 +282,13 @@ function App() {
       })
       .catch((err) => {
         console.error(err);
+        if (err.status === 401) {
+          logout();
+        }
       });
   };
 
-  const movieAdded = (movie) => savedMovies.some(smov => smov.id === movie.id);
+  const movieAdded = (movie) => savedMovies.some(smov => smov.movieId === movie.id);
 
   const handleLike = (m, Liked) => (Liked ? putLikeOnCard(m) : removeLikeOnCard(m));
 
