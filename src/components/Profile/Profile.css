@@ -54,6 +54,16 @@
   line-height: 13px;
   text-align: right;
   color: #FFF;
+  flex-grow: 1;
+}
+
+.profile__input-error {
+  min-height: 12px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
 }
 
 .profile__submit-btn {
@@ -70,6 +80,28 @@
 
 .profile__submit-btn:hover {
   opacity: 0.4;
+}
+
+.profile__submit-btn_non-active {
+  background-color: grey;
+}
+
+.profile__submit-success {
+  min-height: 12px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: darkgreen;
+}
+
+.profile__submit-failed {
+  min-height: 12px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
 }
 
 .profile__logout-btn {

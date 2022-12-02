@@ -1,16 +1,35 @@
 import './Movies.css';
 import SearchForm from "../SearchForm/SearchForm.js";
 import MoviesCardList from "../MoviesCardList/MoviesCardList.js";
-import {initialCards} from "../../utils/initialCards.js";
 import CheckboxContainer from "../CheckboxContainer/CheckboxContainer";
+import Preloader from '../Preloader/Preloader';
+import {filterShort} from "../../utils/utils";
 
-function Movies() {
+function Movies({
+                  onSubmitSearch, movies, loading, loadingError, onLikeClick, movieAdded,
+                  filterIsOn, switchFilter, query,
+                }) {
+
+  const onFilterClick = () => {
+    switchFilter(!filterIsOn);
+    localStorage.setItem('filterIsOn', JSON.stringify(!filterIsOn));
+  };
   return (
     <section aria-label='Фильмы' className='movies'>
-      <SearchForm />
-      <CheckboxContainer/>
-      <MoviesCardList btnType='movies-card__btn_type_like' cards={initialCards} />
-      <button type="submit" aria-label='Ещё' className="movies__more-btn">Ещё</button>
+      <SearchForm query={query} loading={loading} onSearch={onSubmitSearch}/>
+      {loading && <Preloader/>}
+      <CheckboxContainer onFilterClick={onFilterClick} filterIsOn={filterIsOn}/>
+      {!loading
+        && loadingError === ''
+        && <MoviesCardList btnType='like'
+                           onLikeClick={onLikeClick}
+                           movies={filterIsOn ? filterShort(movies) : movies}
+                           movieAdded={movieAdded}/>}
+      {
+        !loading
+        && loadingError !== ''
+        && <div className="movies__error">{loadingError}</div>
+      }
     </section>
   );
 }
